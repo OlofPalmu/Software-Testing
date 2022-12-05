@@ -1,0 +1,78 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Creating issues to project using CRUD Operation: Create, Read, Update, Delete
+
+# TODO: Write Precondition and Postcondition, Tags
+
+Pre Condition	Existing GitLab Project
+Post Condition	Close All Browsers
+Tags Issues
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Issue creation field variables, Updated name of the issue
+
+IssueURL = https://gitlab.com/projects/
+Issue_Title = 2022Project-issue
+Issue_Title_Updated = 22Project-issue1
+Issue_Comment = *****
+
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive Test Cases and Test Process steps
+
+# Positive Test
+
+Create issue to existing project
+	Navigating to projects IssueURL
+	Opening the existing project you want to create an issue to
+	Clicking 'Issues' from left sidebar
+	Clicking 'New issue'
+	Inserting issue title Issue_Title
+	Writing a description (this step is optional but recommended) Issue_Comment
+	Submitting 'Create issue'
+	Verify message says 'Issue created just now by user'
+
+Update name of issue
+	Navigating to projects IssueURL
+	Opening the existing project
+	Clicking 'Issues' from left sidebar
+	Clicking the existing issue you want to update
+	Clicking the pencil image on the right side
+	Changing name of the issue Issue_Title_Updated
+	Writing down a comment Issue_Comment
+	Submitting 'Save changes' form
+	Name of the issue changed and verification text says 'Edited just now by user'
+
+Create second issue with privious updated name
+	Navigating to projects IssueURL
+	Opening the existing project
+	Clicking 'Issues' from left sidebar
+	Clicking 'New issue'
+	Inserting previous updated name to issue title Issue_Title_Updated
+	Writing a description (this step is optional but recommended) Issue_Comment
+	Submitting 'Create issue'
+	Verify message says 'Issue created just now by user'
+	Expected error message because of the same issue title
+
+Delete first issue
+	Navigating to projects IssueURL
+	Opening the existing project
+	Clicking 'Issues' from left sidebar
+	Clicking the bottom issue
+	Clicking the 3 vertical dots on the right side of the page
+	Clicking 'Delete issue'
+	Verification asks if I am sure that I want to delete the issue
+	Clicking 'Delete issue'
+	Verify message says 'The issue was succesfully deleted.'

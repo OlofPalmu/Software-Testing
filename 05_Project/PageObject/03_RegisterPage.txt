@@ -1,0 +1,103 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Documentation e.g. User Registration Test scenario with verification, valid and invalid credentials.
+
+Documentation	Testing the register functionality. Positive test to register an account succesfully and negative test using invalid credentials.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Open Browser
+Post Condition	Close All Browsers
+Tags Register
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Registration field variables
+
+RegisterUrl = https://gitlab.com/users/sign_up
+FirstName = Ville
+LastName = Palmu
+Email = palmuville@gmail.com
+UserName = PalmuVille
+Password = ***********
+Invalid_Username = Palmu
+Invalid_Password = ******
+Invalid_Email = palmuville
+Empty =
+
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test
+
+Register user with valid username and password 
+	Navigate to register page RegisterUrl
+	Input first name FirstName
+	Input last name LastName
+	Input username UserName
+	Input email Email
+	Input password Password
+	Click the confirmation box
+	Submit register form
+	Confirm your email
+
+	
+
+# Negative Test
+
+Register user with same username
+	Navigate to register page RegisterUrl
+	Input first name FirstName
+	Input last name LastName
+	Input username UserName
+	Input email Email
+	Input password Password
+	Click the confirmation box
+	Submit register form
+	Verify error message that Email and UserName has already been taken
+	Also the username box is red after writing username and it says Username is already taken
+
+Register user with empty password
+	Navigate to register page RegisterUrl
+	Input first name FirstName
+	Input last name LastName
+	Input username UserName
+	Input email Email
+	Input password Empty
+	Click the recaptcha
+	Submit register form
+	Verify error message that says Minimum length is 8 characters and username is already taken
+
+Register user with invalid email
+	Navigate to register page RegisterUrl
+	Input first name FirstName
+	Input last name LastName
+	Input username UserName
+	Input email Invalid_Email
+	Input password Password
+	Click the recaptcha
+	Submit register form
+	Verify error message that says Please provide a valid email address and username is already taken
+
+Register user without recaptcha
+	Navigate to register page RegisterUrl
+	Input first name FirstName
+	Input last name LastName
+	Input username UserName
+	Input email Email
+	Input password Password
+	Do not click recaptcha
+	Submit register form
+	Verify page has error message that says There was an error with the reCAPTCHA. Please solve the reCAPTCHA again.

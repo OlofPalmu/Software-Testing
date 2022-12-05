@@ -1,0 +1,92 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+
+Documentation	Testing the functionality of the Project Testing page using CRUD Operation.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Existing GitLab User 
+Post Condition	Close All Browsers
+Tags	ProjectTest
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Project creation field variables
+
+ProjectURL = https://gitlab.com/projects/
+Project_Name = 2022Project
+Project_Slug = 2022-project
+Project_Template_Name = 22Project
+Project_Template_Slug = 22-Project
+
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test
+
+Create blank project
+	Navigate to projects ProjectURL
+	Click 'New Project'
+	Click 'Create blank project'
+	Insert project name  Project_Name
+	Insert project slug Project_Slug
+	Submit 'Create project' form
+	Verify message says 'Project "Project_Name" was succesfully created.
+
+Create template project 
+	Navigate to projects ProjectURL
+	Click 'New Project'
+	Click 'Create from template'
+	Select any template - in this case 'Ruby on Rails' selected
+	Submit 'Create project' form
+	Verify message says 'Project "Project_Template_Name" was succesfully created.
+
+Update name of template project
+	Navigate to projects ProjectURL
+	Open template project
+	Click 'Settings' from left sidebar
+	Click 'General'
+	Change name of template project
+	Submit 'Save changes'
+	Verify message says 'Project was succesfully updated'
+
+Delete template project
+	Navigate to projects ProjectURL
+	Open template project
+	Click 'Settings' from left sidebar
+	Click 'General'
+	Scroll down to 'Advanced' and click 'Expand'
+	Scroll down and submit 'Delete Project'
+	Deletion verification ask to write down a certain text, write it and click 'Yes, delete project'
+	Verify message says 'Project is in the process of being deleted.'
+
+# Negative Test
+
+Create a blank project with the previous same name
+	Navigate to projects ProjectURL
+	Click 'New Project'
+	Click 'Create blank project'
+	Insert project name  Project_Name
+	Insert project slug Project_Slug
+	Submit 'Create project' form
+	Verify error message says 'The form contains the following errors:
+		Project namespace name has already taken
+		Name has already taken
+		Path has already taken
+
+
+
